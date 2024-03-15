@@ -1,69 +1,83 @@
 package br.com.projetoHospital.model;
 
 public class Paciente {
-	
+
 	// Atributos
 	private int id;
 	private String nome;
 	private int idade;
 	private String sexo;
 	private boolean isInternado;
-	
+
 	// Construtor vazio
-	public Paciente () {
-		
+	public Paciente() {
+
 	}
-	
+
 	// Construtor com parâmetros
-	public Paciente (int id, String nome, int idade, String sexo) {
+	public Paciente(int id, String nome, int idade, String sexo) {
 		this.id = id;
 		this.nome = nome;
 		this.idade = idade;
 		this.sexo = sexo;
 		this.isInternado = false;
 	}
-	
+
 	// Get
-	public int getId () {
+	public int getId() {
 		return this.id;
 	}
-	
-	public String getNome () {
+
+	public String getNome() {
 		return this.nome;
 	}
-	
-	public int getIdade () {
+
+	public int getIdade() {
 		return this.idade;
 	}
-	
-	public String getSexo () {
+
+	public String getSexo() {
 		return this.sexo;
 	}
-	
-	public boolean isInternado () {
+
+	public boolean isInternado() {
 		return this.isInternado;
 	}
-	
+
 	// Set
-	public void setId (int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	
-	public void setNome (String nome) {
+
+	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
-	public void setIdade (int idade) {
+
+	public void setIdade(int idade) {
 		this.idade = idade;
 	}
-	
-	public void setSexo (String sexo) {
+
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
-	public void setIsInternado (boolean isInternado) {
+
+	public void setIsInternado(boolean isInternado) {
 		this.isInternado = isInternado;
 	}
 
-	
+
+	public void exibirDadosPaciente () {
+		System.out.println("-------------------------------------------");
+		System.out.println("Código: " + this.id + " Paciente: " + this.nome);
+		System.out.println("Idade: " + this.idade + " anos.");
+
+		if (this.idade >= 60) {
+			System.out.println("Paciente tem direito à acompanhante!");
+		} else {
+			System.out.println("Paciente não tem direito à acompanhante!");
+		}
+
+		System.out.println("-------------------------------------------");
+	}
+
 }
