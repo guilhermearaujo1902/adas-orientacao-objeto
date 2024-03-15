@@ -60,6 +60,10 @@ public class Medico {
 		System.out.println("\nPaciente cadastrado com sucesso!");
 	}
 	
+	// Melhorar o método para que seja possível imprimir o relatório de 3 formas, sendo:
+	// - todos os pacientes
+	// - somente os pacientes internados
+	// - somente os pacientes não internados
 	public void imprimirRelatorioPacientes () {
 		
 		System.out.println("- Relatório de Pacientes: dr(a) " + this.nome + " -");
@@ -68,5 +72,7 @@ public class Medico {
 		}
 		
 	}
+	
+	// Implementar o método 'realizarAltaPaciente'
 
 }
