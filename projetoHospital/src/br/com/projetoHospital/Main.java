@@ -34,6 +34,7 @@ public class Main {
 		
 		medica.imprimirRelatorioPacientes(2);
 		
+		medica.realizarAltaPaciente(2);
 		
 	}
 

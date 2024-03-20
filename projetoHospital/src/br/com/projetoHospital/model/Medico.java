@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Medico {
-	
+
 	private int id;
 	private String nome;
 	private String especializade;
 	private boolean isPlantao;
 	private List<Paciente> pacientes;
-	
-	public Medico () {
+
+	public Medico() {
 		this.pacientes = new ArrayList<Paciente>();
 	}
 
@@ -54,7 +54,7 @@ public class Medico {
 	public void setPacientes(List<Paciente> pacientes) {
 		this.pacientes = pacientes;
 	}
-	
+
 	private List<Paciente> getPacientesInternados() {
 		List<Paciente> lista = new ArrayList<Paciente>();
 		for (Paciente paciente : this.pacientes) {
@@ -64,15 +64,14 @@ public class Medico {
 		}
 		return lista;
 	}
-	
-	
-	public void cadastrarPaciente (Paciente paciente) {
+
+	public void cadastrarPaciente(Paciente paciente) {
 		this.pacientes.add(paciente);
 		System.out.println("\nPaciente cadastrado com sucesso!");
 	}
 
-	public void imprimirRelatorioPacientes (int tipoRelatorio) {
-		
+	public void imprimirRelatorioPacientes(int tipoRelatorio) {
+
 		if (this.pacientes.size() == 0) {
 			System.out.println("Sem pacientes cadastrados.");
 		} else {
@@ -81,16 +80,16 @@ public class Medico {
 			// 2 - Imprimir Internados
 			// 3 - Imprimir Não Internados
 			switch (tipoRelatorio) {
-			case 1: 
+			case 1:
 				System.out.println("\n\n- Relatório de Pacientes: dr(a) " + this.nome + " -");
 				for (Paciente paciente : this.pacientes) {
 					paciente.exibirDadosPaciente();
 				}
 				break;
-			case 2: 
-				
+			case 2:
+
 				List<Paciente> internados = getPacientesInternados();
-				
+
 				if (internados.size() == 0) {
 					System.out.println("Não existem pacientes internados.");
 				} else {
@@ -99,7 +98,7 @@ public class Medico {
 						paciente.exibirDadosPaciente();
 					}
 				}
-				
+
 				break;
 			case 3:
 				System.out.println("\n\n- Relatório de Pacientes não Internados: dr(a) " + this.nome + " -");
@@ -114,13 +113,39 @@ public class Medico {
 			}
 		}
 	}
-	
+
 	/*
-	 * Desobrir qual paciente receberá alta
-	 * Descobrir se o paciente está internado ou não
-	 * Atualizar a propriedade que indica a internação
-	 * */
-	// Implementar o método 'realizarAltaPaciente'
-	
+	 * Desobrir qual paciente receberá alta Descobrir se o paciente está internado
+	 * ou não Atualizar a propriedade que indica a internação
+	 */
+//	Abordagem 1
+//	public void realizarAltaPaciente(Paciente paciente) {
+//		if (paciente.isInternado() == true) {
+//			paciente.setIsInternado(false);
+//			System.out.println(paciente.getNome() + " está de alta!");
+//		}
+//	}
+	public void realizarAltaPaciente(int idPaciente) {
+
+		Paciente pacienteAlta = null;
+
+		for (Paciente paciente : this.pacientes) {
+			if (paciente.getId() == idPaciente) {
+				pacienteAlta = paciente;
+			}
+		}
+
+		if (pacienteAlta == null) {
+			System.out.println("Paciente não encontrado para o id: " + idPaciente);
+		} else {
+			if (pacienteAlta.isInternado() == true) {
+				pacienteAlta.setIsInternado(false);
+				System.out.println(pacienteAlta.getNome() + " está de alta!");
+			} else {
+				System.out.println(pacienteAlta.getNome() + " não está internado!");
+			}
+		}
+
+	}
 
 }
