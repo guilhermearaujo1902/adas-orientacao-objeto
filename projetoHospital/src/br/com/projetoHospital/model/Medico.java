@@ -1,5 +1,6 @@
 package br.com.projetoHospital.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Medico {
@@ -11,7 +12,7 @@ public class Medico {
 	private List<Paciente> pacientes;
 	
 	public Medico () {
-		
+		this.pacientes = new ArrayList<Paciente>();
 	}
 
 	public int getId() {
@@ -54,25 +55,72 @@ public class Medico {
 		this.pacientes = pacientes;
 	}
 	
+	private List<Paciente> getPacientesInternados() {
+		List<Paciente> lista = new ArrayList<Paciente>();
+		for (Paciente paciente : this.pacientes) {
+			if (paciente.isInternado()) {
+				lista.add(paciente);
+			}
+		}
+		return lista;
+	}
+	
 	
 	public void cadastrarPaciente (Paciente paciente) {
 		this.pacientes.add(paciente);
 		System.out.println("\nPaciente cadastrado com sucesso!");
 	}
-	
-	// Melhorar o método para que seja possível imprimir o relatório de 3 formas, sendo:
-	// - todos os pacientes
-	// - somente os pacientes internados
-	// - somente os pacientes não internados
-	public void imprimirRelatorioPacientes () {
+
+	public void imprimirRelatorioPacientes (int tipoRelatorio) {
 		
-		System.out.println("- Relatório de Pacientes: dr(a) " + this.nome + " -");
-		for (Paciente paciente : this.pacientes) {
-			paciente.exibirDadosPaciente();
+		if (this.pacientes.size() == 0) {
+			System.out.println("Sem pacientes cadastrados.");
+		} else {
+			// Tipos de Relatórios:
+			// 1 - Imprimir todos
+			// 2 - Imprimir Internados
+			// 3 - Imprimir Não Internados
+			switch (tipoRelatorio) {
+			case 1: 
+				System.out.println("\n\n- Relatório de Pacientes: dr(a) " + this.nome + " -");
+				for (Paciente paciente : this.pacientes) {
+					paciente.exibirDadosPaciente();
+				}
+				break;
+			case 2: 
+				
+				List<Paciente> internados = getPacientesInternados();
+				
+				if (internados.size() == 0) {
+					System.out.println("Não existem pacientes internados.");
+				} else {
+					System.out.println("\n\n- Relatório de Pacientes Internados: dr(a) " + this.nome + " -");
+					for (Paciente paciente : internados) {
+						paciente.exibirDadosPaciente();
+					}
+				}
+				
+				break;
+			case 3:
+				System.out.println("\n\n- Relatório de Pacientes não Internados: dr(a) " + this.nome + " -");
+				for (Paciente paciente : this.pacientes) {
+					if (paciente.isInternado() == false) {
+						paciente.exibirDadosPaciente();
+					}
+				}
+				break;
+			default:
+				System.out.println("Tipo de relatório indisponível.");
+			}
 		}
-		
 	}
 	
+	/*
+	 * Desobrir qual paciente receberá alta
+	 * Descobrir se o paciente está internado ou não
+	 * Atualizar a propriedade que indica a internação
+	 * */
 	// Implementar o método 'realizarAltaPaciente'
+	
 
 }
